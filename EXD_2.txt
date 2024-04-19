@@ -1,0 +1,96 @@
+QUERIES FOR 2 QUESTION -- BUT YOU HAVE TO CREATE TABLES AND INSERT ALL THE VALUES 
+
+-------------------------------------------------------------------------
+CREATING TABLES 
+-------------------------------------------------------------------------
+
+CREATE TABLE User_URK22AI1030 (UserID NUMBER(10) PRIMARY KEY, Name VARCHAR2(255), Email VARCHAR2(255), Password VARCHAR2(255), Phone VARCHAR2(20));
+
+
+CREATE TABLE Venue_URK22AI1030 (VenueID NUMBER(10), Name VARCHAR2(255),Address VARCHAR2(255),City VARCHAR2(255),State VARCHAR2(255),Country VARCHAR2(255),PRIMARY KEY (VenueID));
+
+CREATE TABLE Event_URK22AI1030 (EventID NUMBER(10), Name VARCHAR2(255), EventDate DATE, Time VARCHAR2(255), VenueID NUMBER(10), Description VARCHAR2(500), PRIMARY KEY (EventID));
+
+CREATE TABLE Ticket_URK22AI1030 (TicketID NUMBER(10), EventID NUMBER(10), UserID NUMBER(10), SeatNumber VARCHAR2(20), Price NUMBER(10,2), Status VARCHAR2(50), PRIMARY KEY(TicketID), FOREIGN KEY(EventID) REFERENCES Event_URK22AI1030(EventID), FOREIGN KEY(UserID) REFERENCES User_URK22AI1030(UserID));
+
+-------------------------------------------------------------------------------
+EASY WAY FOR INSERTING VALUES 
+
+--------------------------------------------------------------------------------
+INSERT EACH ROW EVERYTIME WITH INSERT COMMAND - AND INSTEAD OF , USE ; -- REMEMBER AFTER COPY THAT CODE AND PASTE YOU SHOULD HAVE TO DO 
+
+-------------------------------------------------------------------------------
+INSERT VALUES FOR USER TABLE --
+
+INSERT INTO USER_URK22AI1030 (UserID, Name, Email, Password, Phone) VALUES
+(1, 'John Smith', 'john.smith@example.com', 'password1', '12345678901'),
+(2, 'Jane Doe', 'jane.doe@example.com', 'p@ssw0rd', '98765432101'),
+(3, 'Michael Lee', 'michael.lee@example.com', '12345678', '44332211000'),
+(4, 'Sarah Adams', 'sarah.adams@example.com', 'sAdams123', '11223344556'),
+(5, 'David Wang', 'david.wang@example.com', 'dWang2023', '65432109876'),
+(6, 'Emily Chen', 'emily.chen@example.com', 'chen123', '91827364560'),
+(7, 'Alex Kim', 'alex.kim@example.com', 'kimAlex22', '55566677788'),
+(8, 'Lisa Lopez', 'lisa.lopez@example.com', 'lisa123', '99900011122');
+
+--------------------------------------------------------------------------------
+INSERT VALUES VENUE TABLE ---
+
+INSERT INTO Venue_URK22AI1030 (VenueID, Name, Address, City, State, Country) VALUES
+(101, 'City Park', '123 Park Street', 'New York', 'NY', 'USA'),
+(102, 'Open Field', '456 Meadow Lane', 'Los Angeles', 'CA', 'USA'),
+(103, 'Sports Arena', '789 Stadium Road', 'Chicago', 'IL', 'USA'),
+(104, 'Art Gallery', '101 Art Avenue', 'San Francisco', 'CA', 'USA'),
+(105, 'Event Center', '555 Celebration Boulevard', 'Miami', 'FL', 'USA'),
+(106, 'Comedy Club', '777 Laughter Street', 'Houston', 'TX', 'USA'),
+(107, 'Convention Center', '999 Tech Avenue', 'Seattle', 'WA', 'USA'),
+(108, 'Dance Studio', '222 Rhythm Road', 'Boston', 'MA', 'USA');
+
+---------------------------------------------------------------------------------
+INSERT VALUES EVENT TABLE ----
+
+INSERT INTO Event_URK22AI1030 (EventID, Name, Date, Time, VenueID, Description) VALUES
+(1, 'Concert in Park', '15-AUG-2023', '18:00', 101, 'Enjoy a live concert in the city park.'),
+(2, 'Movie Night', '20-AUG-2023', '20:30', 102, 'Movie night under the stars.'),
+(3, 'Sports Tournament', '05-09-2023', '14:00', 103, 'Join us for an exciting sports tournament.'),
+(4, 'Art Exhibition', '10-AUG-2023', '12:00', 104, 'Explore various artworks by local artists.'),
+(5, 'Food Festival', '25-SEP-2023', '11:00', 105, 'A celebration of diverse cuisines.'),
+(6, 'Comedy Show', '01-OCT-2023', '19:30', 106, 'Laugh your heart out at our comedy show.'),
+(7, 'Tech Conference', '15-OCT-2023', '09:00', 107, 'Join tech experts for informative sessions.'),
+(8, 'Dance Workshop', '05-NOV-2023', '16:00', 108, 'Learn various dance styles in this workshop.');
+-----------------------------------------------------------------------------------
+
+INSERT VALUES FOR TICKET TABLE ----
+
+INSERT INTO Ticket_URK22AI1030 (TicketI, EventI, UserID, SeatNumber, Price, Status) VALUES
+(1, 1, 1, 'A1', 25, 'Booked'),
+(2, 1, 2, 'B2', 25, 'Booked'),
+(3, 2, 3, 'C3', 15, 'Booked'),
+(4, 2, 4, 'D4', 15, 'Booked'),
+(5, 3, 5, 'A2', 10, 'Booked'),
+(6, 3, 6, 'B3', 10, 'Booked'),
+(7, 4, 7, 'C4', 8.5, 'Booked'),
+(8, 4, 8, 'D5', 8.5, 'Booked');
+
+
+--------------------------------------------------------------------------------
+15-QUES
+--------------------------------------------------------------------------------
+
+1. SELECT * FROM User_URK22AI1030 WHERE Name LIKE '%Smith%';
+2. SELECT * FROM User_URK22AI1030 WHERE Password != 'password1';
+3. SELECT * FROM User_URK22AI1030 WHERE Email LIKE '%@example.com' AND Phone LIKE '+9876%';
+4. SELECT * FROM User_URK22AI1030 WHERE UserID IN (2, 4, 6);
+5. SELECT * FROM Event_URK22AI1030 WHERE Date > '15-SEP-2023';
+6. SELECT * FROM Event_URK22AI1030 WHERE Date > '10-SEP-2023' AND VenueID > 105;
+7. SELECT * FROM Event_URK22AI1030 WHERE Name LIKE '%Concert%' OR Name LIKE '%Show%';
+8. UPDATE Ticket_URK22AI1030 SET Price = Price + 5 WHERE Status = 'Booked';
+9. UPDATE Ticket_URK22AI1030 SET Price = Price - 10 WHERE EventID = 2;
+10. UPDATE Ticket_URK22AI1030 SET Price = Price * 2 WHERE Status = 'Booked' AND EventID = 1;
+11. UPDATE Ticket_URK22AI1030 SET Price = Price + 5 WHERE Status = 'Booked' AND Price < 20;
+12. UPDATE Event_URK22AI1030 SET VenueID = 110 WHERE EventID = 3;
+13. SELECT * FROM Event_URK22AI1030 WHERE Date >= '2023-09-20';
+14. DELETE FROM Event_URK22AI1030 WHERE EventID = 2;
+15. SELECT * FROM Event_URK22AI1030 WHERE Description LIKE '%workshop%';
+
+
+-----------------------------------------------------------------------------------

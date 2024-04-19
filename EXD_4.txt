@@ -1,0 +1,72 @@
+1) SELECT u.Name
+FROM User_URK22AI1030 u
+JOIN Ticket_URK22AI1030 t ON u.UserID = t.UserID
+JOIN Event_URK22AI1030 e ON t.EventID = e.EventID
+WHERE e.Name = 'Concert in Park';
+
+2) SELECT e.Name, e.EventDate, e.Time
+FROM User_URK22AI1030 u
+JOIN Ticket_URK22AI1030 t ON u.UserID = t.UserID
+JOIN Event_URK22AI1030 e ON t.EventID = e.EventID
+WHERE u.Name = 'Sarah Adams';
+
+3) SELECT e.Name, e.Description
+FROM Event_URK22AI1030 e
+LEFT JOIN Ticket_URK22AI1030 t ON e.EventID = t.EventID
+WHERE t.TicketID IS NULL;
+
+4) SELECT u.Name, e.Name, e.EventDate
+FROM User_URK22AI1030 u
+JOIN Ticket_URK22AI1030 t ON u.UserID = t.UserID
+JOIN Event_URK22AI1030 e ON t.EventID = e.EventID;
+
+5) SELECT u.Name
+FROM User_URK22AI1030 u
+JOIN Ticket_URK22AI1030 t ON u.UserID = t.UserID
+JOIN Event_URK22AI1030 e ON t.EventID = e.EventID
+WHERE e.EventDate >= TO_DATE('2023-09-01', 'YYYY-MM-DD');
+
+6) SELECT u.Name
+FROM User_URK22AI1030 u
+JOIN Ticket_URK22AI1030 t ON u.UserID = t.UserID
+JOIN Event_URK22AI1030 e ON t.EventID = e.EventID
+WHERE e.Name = 'Movie Night';
+
+7) SELECT e.Name, u.Name, t.SeatNumber
+FROM User_URK22AI1030 u
+JOIN Ticket_URK22AI1030 t ON u.UserID = t.UserID
+JOIN Event_URK22AI1030 e ON t.EventID = e.EventID;
+
+8) SELECT u.Name
+FROM User_URK22AI1030 u
+LEFT JOIN Ticket_URK22AI1030 t ON u.UserID = t.UserID
+WHERE t.TicketID IS NULL;
+
+9) SELECT e.Name, e.EventDate, e.Time, v.Name AS VenueName, v.Address, v.City, v.State, v.Country
+FROM Event_URK22AI1030 e
+LEFT JOIN Venue_URK22AI1030 v ON e.VenueID = v.VenueID;
+
+10) SELECT e.Name, e.EventDate, e.Time, v.Name AS VenueName, v.Address, v.City, v.State, v.Country
+FROM Event_URK22AI1030 e
+FULL OUTER JOIN Venue_URK22AI1030 v ON e.VenueID = v.VenueID;
+
+11) SELECT Email FROM User_URK22AI1030
+UNION
+SELECT NULL AS Email FROM Event_URK22AI1030;
+
+12) SELECT City FROM Event_URK22AI1030
+UNION
+SELECT City FROM Venue_URK22AI1030;
+
+13) SELECT v1.*
+FROM Venue_URK22AI1030 v1
+JOIN Venue_URK22AI1030 v2 ON v1.VenueID = v2.VenueID;
+
+14) SELECT u.*
+FROM User_URK22AI1030 u
+JOIN Ticket_URK22AI1030 t ON u.UserID = t.UserID;
+
+15) SELECT e.*
+FROM Event_URK22AI1030 e
+LEFT JOIN Ticket_URK22AI1030 t ON e.EventID = t.EventID
+WHERE t.TicketID IS NULL;

@@ -1,0 +1,163 @@
+1) 
+
+SELECT name
+FROM USER_URK22AI1030
+WHERE userid IN (
+    SELECT userid
+    FROM TICKET_URK22AI1030
+    WHERE eventid IN (
+        SELECT eventid
+        FROM EVENT_URK22AI1030
+        WHERE venueid IN (
+            SELECT venueid
+            FROM VENUE_URK22AI1030
+            WHERE country = 'USA'
+        )
+    )
+);
+
+2)
+
+SELECT *
+FROM EVENT_URK22AI1030
+WHERE eventid IN (
+    SELECT eventid
+    FROM TICKET_URK22AI1030
+    WHERE price = (
+        SELECT MAX(price)
+        FROM TICKET_URK22AI1030
+    )
+);
+
+3)
+
+SELECT eventid, COUNT(*) AS total_tickets_reserved
+FROM TICKET_URK22AI1030
+WHERE eventid = 2
+GROUP BY eventid;
+
+4)
+
+SELECT userid, name
+FROM USER_URK22AI1030
+WHERE userid IN (
+    SELECT userid
+    FROM TICKET_URK22AI1030
+    GROUP BY userid
+    HAVING SUM(price) > 15
+);
+
+5)
+
+SELECT *
+FROM EVENT_URK22AI1030
+WHERE eventid IN (
+    SELECT eventid
+    FROM TICKET_URK22AI1030
+    GROUP BY eventid
+    HAVING COUNT(*) > 1
+);
+
+6)
+
+SELECT userid, name
+FROM USER_URK22AI1030
+WHERE userid IN (
+    SELECT userid
+    FROM TICKET_URK22AI1030
+    GROUP BY userid
+    HAVING COUNT(*) > (
+        SELECT AVG(reservation_count)
+        FROM (
+            SELECT userid, COUNT(*) AS reservation_count
+            FROM TICKET_URK22AI1030
+            GROUP BY userid
+        )
+    )
+);
+
+7)
+
+SELECT *
+FROM EVENT_URK22AI1030 e
+WHERE (
+    SELECT SUM(price)
+    FROM TICKET_URK22AI1030 t
+    WHERE t.eventid = e.eventid
+) > 2 ;
+
+8)
+
+SELECT userid, name
+FROM USER_URK22AI1030 u
+WHERE (
+    SELECT COUNT(DISTINCT eventid)
+    FROM TICKET_URK22AI1030 t
+    WHERE t.userid = u.userid
+) > 1;
+
+9)
+
+SELECT *
+FROM EVENT_URK22AI1030 e
+WHERE (
+    SELECT COUNT(*)
+    FROM TICKET_URK22AI1030 t
+    WHERE t.eventid = e.eventid
+) = (
+    SELECT MAX(reservation_count)
+    FROM (
+        SELECT eventid, COUNT(*) AS reservation_count
+        FROM TICKET_URK22AI1030
+        GROUP BY eventid
+    )
+);
+
+10)
+
+SELECT e.eventid, e.name, COUNT(*) AS num_reservations
+FROM EVENT_URK22AI1030 e
+JOIN TICKET_URK22AI1030 t ON e.eventid = t.eventid
+GROUP BY e.eventid, e.name;
+
+
+11)
+
+SELECT *
+FROM EVENT_URK22AI1030 e
+WHERE (
+    SELECT SUM(price)
+    FROM TICKET_URK22AI1030 t
+    WHERE t.eventid = e.eventid
+) > (
+    SELECT AVG(total_price)
+    FROM (
+        SELECT eventid, SUM(price) AS total_price
+        FROM TICKET_URK22AI1030
+        GROUP BY eventid
+    )
+);
+
+12)
+
+
+SELECT userid, name
+FROM USER_URK22AI1030 u
+WHERE (
+    SELECT COUNT(DISTINCT eventdate)
+    FROM TICKET_URK22AI1030 t
+    JOIN EVENT_URK22AI1030 e ON t.eventid = e.eventid
+    WHERE t.userid = u.userid ) = (
+    SELECT COUNT(DISTINCT eventid)
+    FROM TICKET_URK22AI1030
+    WHERE userid = u.userid
+);
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,243 @@
+1) 
+
+CREATE OR REPLACE FUNCTION getUserEmail(input_name IN VARCHAR2) RETURN VARCHAR2
+IS
+  user_email User_URK22AI1030.Email%TYPE;
+BEGIN
+  SELECT Email INTO user_email
+  FROM User_URK22AI1030
+  WHERE Name = input_name;
+
+  RETURN user_email;
+EXCEPTION
+  WHEN NO_DATA_FOUND THEN
+    RETURN NULL;
+END;
+/
+---------------
+SELECT getUserEmail('Jane Doe') AS user_email FROM DUAL;
+--------------
+
+2)
+
+CREATE OR REPLACE PROCEDURE changePhoneNumber(input_name IN VARCHAR2, new_phone IN VARCHAR2)
+IS
+BEGIN
+  UPDATE User_URK22AI1030
+  SET Phone = new_phone
+  WHERE Name = input_name;
+  COMMIT;
+EXCEPTION
+  WHEN NO_DATA_FOUND THEN
+    NULL;
+END;
+/
+
+----------------
+BEGIN
+  changePhoneNumber('Jane Doe', '1999999990');
+  DBMS_OUTPUT.PUT_LINE('Phone number updated successfully.');
+END;
+/
+-------------
+
+3)
+
+CREATE OR REPLACE FUNCTION getEventDescription(input_event_name IN VARCHAR2) RETURN VARCHAR2
+IS
+  event_description Event_URK22AI1030.Description%TYPE;
+BEGIN
+  SELECT Description INTO event_description
+  FROM Event_URK22AI1030
+  WHERE Name = input_event_name;
+
+  RETURN event_description;
+EXCEPTION
+  WHEN NO_DATA_FOUND THEN
+    RETURN NULL;
+END;
+/
+
+--------------
+SELECT getEventDescription('Movie Night') AS event_description FROM DUAL;
+--------------
+4) 
+
+CREATE OR REPLACE PROCEDURE updateEventVenue(input_event_name IN VARCHAR2, new_venue_id IN NUMBER)
+IS
+BEGIN
+  UPDATE Event_URK22AI1030
+  SET VenueID = new_venue_id
+  WHERE Name = input_event_name;
+  COMMIT;
+EXCEPTION
+  WHEN NO_DATA_FOUND THEN
+    NULL;
+END;
+/
+
+--------------
+BEGIN
+  updateEventVenue('Food Festival', 104);
+  DBMS_OUTPUT.PUT_LINE('Event venue updated successfully.');
+END;
+/
+--------------
+
+5)
+
+CREATE OR REPLACE FUNCTION getVenueAddress(input_venue_name IN VARCHAR2) RETURN VARCHAR2
+IS
+  venue_address Venue_URK22AI1030.Address%TYPE;
+BEGIN
+  SELECT Address INTO venue_address
+  FROM Venue_URK22AI1030
+  WHERE Name = input_venue_name;
+
+  RETURN venue_address;
+EXCEPTION
+  WHEN NO_DATA_FOUND THEN
+    RETURN NULL;
+END;
+/
+
+-------------
+SELECT getVenueAddress('City Park') AS venue_address FROM DUAL;
+-------------
+
+6)
+CREATE OR REPLACE PROCEDURE updateVenueCity(input_venue_name IN VARCHAR2, new_city IN VARCHAR2)
+IS
+BEGIN
+  UPDATE Venue_URK22AI1030
+  SET City = new_city
+  WHERE Name = input_venue_name;
+  COMMIT;
+EXCEPTION
+  WHEN NO_DATA_FOUND THEN
+    NULL;
+END;
+/
+
+--------------------
+BEGIN
+  updateVenueCity('Sports Arena', 'Viralimalai');
+  DBMS_OUTPUT.PUT_LINE('Venue city updated successfully.');
+END;
+/
+---------------------
+
+7)
+
+CREATE OR REPLACE FUNCTION getVenueState(input_venue_name IN VARCHAR2) RETURN VARCHAR2
+IS
+  venue_state Venue_URK22AI1030.State%TYPE;
+BEGIN
+  SELECT State INTO venue_state
+  FROM Venue_URK22AI1030
+  WHERE Name = input_venue_name;
+
+  RETURN venue_state;
+EXCEPTION
+  WHEN NO_DATA_FOUND THEN
+    RETURN NULL;
+END;
+/
+
+-------------------------------
+SELECT getVenueState('Dance Studio') AS venue_state FROM DUAL;
+------------------------------
+
+8)
+
+CREATE OR REPLACE FUNCTION getTicketPrice(input_ticket_id IN NUMBER) RETURN NUMBER
+IS
+  ticket_price Ticket_URK22AI1030.Price%TYPE;
+BEGIN
+  SELECT Price INTO ticket_price
+  FROM Ticket_URK22AI1030
+  WHERE TicketID = input_ticket_id;
+
+  RETURN ticket_price;
+EXCEPTION
+  WHEN NO_DATA_FOUND THEN
+    RETURN NULL;
+END;
+/
+
+--------------
+SELECT getTicketPrice(1) AS ticket_price FROM DUAL;
+--------------
+
+9)
+
+CREATE OR REPLACE PROCEDURE updateTicketStatus(input_ticket_id IN NUMBER, new_status IN VARCHAR2)
+IS
+BEGIN
+  UPDATE Ticket_URK22AI1030
+  SET Status = new_status
+  WHERE TicketID = input_ticket_id;
+  COMMIT;
+EXCEPTION
+  WHEN NO_DATA_FOUND THEN
+    NULL;
+END;
+/
+
+-----------------
+BEGIN
+  updateTicketStatus(2, 'Pending');
+  DBMS_OUTPUT.PUT_LINE('Ticket status updated successfully.');
+END;
+/
+-----------------
+
+10)
+
+CREATE OR REPLACE FUNCTION getTotalTicketsForEvent(input_event_id IN NUMBER) RETURN NUMBER
+IS
+  ticket_count NUMBER;
+BEGIN
+  SELECT COUNT(*) INTO ticket_count
+  FROM Ticket_URK22AI1030
+  WHERE EventID = input_event_id;
+
+  RETURN ticket_count;
+EXCEPTION
+  WHEN NO_DATA_FOUND THEN
+    RETURN NULL;
+END;
+/
+
+----------------------
+DECLARE
+  total_tickets NUMBER;
+BEGIN
+  total_tickets := getTotalTicketsForEvent(2); 
+  DBMS_OUTPUT.PUT_LINE('Total Tickets: ' || total_tickets);
+END;
+/
+
+------------------
+SELECT getTotalTicketsForEvent(2) AS total_tickets
+FROM dual;
+------------------------------------
+
+----------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

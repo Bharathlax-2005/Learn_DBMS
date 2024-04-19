@@ -1,0 +1,91 @@
+-- 1. Create User, Event, Venue, and Ticket tables based on the given schema.
+CREATE TABLE User_AI1030 (
+    UserID NUMBER(10),
+    Name VARCHAR2(255),
+    Email VARCHAR2(255) UNIQUE,
+    Password VARCHAR2(255),
+    Phone VARCHAR2(20) UNIQUE,
+    PRIMARY KEY (UserID)
+);
+
+CREATE TABLE Event_AI1030 (
+    EventID NUMBER(10),
+    Name VARCHAR2(255),
+    Date DATE,
+    Time VARCHAR2(10),
+    VenueID NUMBER(10),
+    Description VARCHAR2(500),
+    PRIMARY KEY (EventID),
+    FOREIGN KEY (VenueID) REFERENCES Venue_AI1030(VenueID)
+);
+
+CREATE TABLE Venue_AI1030 (
+    VenueID NUMBER(10),
+    Name VARCHAR2(255),
+    Address VARCHAR2(255),
+    City VARCHAR2(255),
+    State VARCHAR2(255),
+    Country VARCHAR2(255),
+    PRIMARY KEY (VenueID)
+);
+
+CREATE TABLE Ticket_AI1030 (
+    TicketID NUMBER(10),
+    EventID NUMBER(10),
+    UserID NUMBER(10),
+    SeatNumber VARCHAR2(20),
+    Price NUMBER(10, 2),
+    Status VARCHAR2(50),
+    PRIMARY KEY (TicketID),
+    FOREIGN KEY (EventID) REFERENCES Event_AI1030(EventID),
+    FOREIGN KEY (UserID) REFERENCES User_AI1030(UserID)
+);
+
+-- 2. Describe the tables.
+DESCRIBE User_AI1030;
+DESCRIBE Event_AI1030;
+DESCRIBE Venue_AI1030;
+DESCRIBE Ticket_AI1030;
+
+-- 3. Alter the User table to add a new column Age.
+ALTER TABLE User_AI1030
+ADD Age NUMBER(3);
+
+-- 4. Drop the newly added column Age.
+ALTER TABLE User_AI1030
+DROP COLUMN Age;
+
+-- 5. Rename the Venue table to Location.
+ALTER TABLE Venue_AI1030
+RENAME TO Location_AI1030;
+
+-- 6. Modify the size of the Event table's Description column to 1000.
+ALTER TABLE Event_AI1030
+MODIFY Description VARCHAR2(1000);
+
+-- 7. Drop the SeatNumber column from the Ticket table.
+ALTER TABLE Ticket_AI1030
+DROP COLUMN SeatNumber;
+
+-- 8. Add a unique constraint on the Email column in the User table.
+ALTER TABLE User_AI1030
+ADD CONSTRAINT unique_email UNIQUE (Email);
+
+-- 9. Rename the UserID column in the User table to ID.
+ALTER TABLE User_AI1030
+RENAME COLUMN UserID TO ID;
+
+-- 10. Modify the Ticket table to add a column named "Barcode" with a data type of VARCHAR2(50).
+ALTER TABLE Ticket_AI1030
+ADD Barcode VARCHAR2(50);
+
+-- 11. Modify the Name column in the Venue table to increase its maximum length to VARCHAR2(300).
+ALTER TABLE Venue_AI1030
+MODIFY Name VARCHAR2(300);
+
+-- 12. Add a foreign key constraint on the VenueID column in the Event table, referencing the Venue table.
+ALTER TABLE Event_AI1030
+ADD CONSTRAINT fk_venue
+FOREIGN KEY (VenueID) REFERENCES Venue_AI1030(VenueID);
+
+-- 13. Add a CHECK constraint to

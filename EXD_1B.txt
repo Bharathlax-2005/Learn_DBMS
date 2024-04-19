@@ -1,0 +1,93 @@
+-- 1. Insert a new user into the "User" table
+
+INSERT INTO User_URK22AI1030 (USERID, NAME, EMAIL) VALUES (5, 'BK', 'bha@gmail.com' );
+
+SELECT * FROM User_URK22AI1030 WHERE UserID = 1030;
+
+
+-- 2. Update the email address of a user with UserID 123
+
+UPDATE User_URK22AI1030 SET Email = 'newemail@example.com' WHERE UserID = 1030;
+
+ SELECT * FROM User_URK22AI1030 WHERE UserID = 1030;
+
+-- 3. Delete a user with the email "example@example.com"
+
+DELETE FROM User_URK22AI1030 WHERE Email = 'bha@gmail.com';
+
+ 
+
+-- 4. Insert a new event into the "Event" table
+
+INSERT INTO Event_URK22AI1030 (EventID, Name, Description) VALUES (2, 'GDG', 'GDG KOCHIN .');
+
+
+-- 5. Update the description of an event with EventID 456
+
+UPDATE Event_URK22AI1030 SET Description = 'Updated description' WHERE EventID = 2;
+
+ 
+
+-- 6. Grant SELECT privileges on the "User" table to a user named "john"
+
+GRANT SELECT ON User_URK22AI1030 TO URK22AI1023;
+
+ 
+
+-- 7. Revoke INSERT privileges on the "Event" table from a user named "mary"
+
+REVOKE INSERT ON Event FROM mary;
+
+ 
+
+-- 8. Create a new user with the username "jane" and grant them all privileges on the "Ticket" table
+
+CREATE USER_URK22AI1030 SK IDENTIFIED BY 'password';
+
+GRANT ALL PRIVILEGES ON Ticket TO jane;0
+
+ 
+
+-- 9. Allow the user “Jane” to perform the update operation on the “Ticket” table
+
+GRANT UPDATE ON Ticket_URK22AI1030 TO jane;
+
+ 
+
+-- 10. Perform an update operation on the “Ticket” table
+INSERT INTO TICKET_URK22AI1030 (TICKETID, SEATNUMBER, STATUS) VALUES (1, 23, 'OPEN');
+
+UPDATE Ticket_URK22AI1030 SET STATUS = 'Closed' WHERE TicketID = 1;
+
+ 
+
+-- 11. Perform a commit in the database
+
+COMMIT;
+
+ 
+
+-- 12. Perform a rollback to a specific savepoint
+
+Savepoint s1;
+insert something
+ROLLBACK TO s1;
+
+ 
+
+-- 13. Perform setting a savepoint within a transaction
+
+SAVEPOINT Savepoint_Name;
+
+ 
+
+-- 14. Enable autocommit mode in the database
+
+SET AUTOCOMMIT = ON;
+
+ 
+
+-- 15. Disable autocommit mode in the database
+
+SET AUTOCOMMIT = OFF;
+
